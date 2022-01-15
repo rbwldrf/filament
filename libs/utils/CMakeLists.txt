@@ -36,6 +36,7 @@ set(DIST_HDRS
         ${PUBLIC_HDR_DIR}/${TARGET}/Slice.h
         ${PUBLIC_HDR_DIR}/${TARGET}/SpinLock.h
         ${PUBLIC_HDR_DIR}/${TARGET}/StructureOfArrays.h
+        ${PUBLIC_HDR_DIR}/${TARGET}/ThermalManager.h
         ${PUBLIC_HDR_DIR}/${TARGET}/unwindows.h
 )
 
@@ -72,6 +73,9 @@ set(SRCS
 
 if (WIN32)
     list(APPEND SRCS src/win32/Path.cpp)
+endif()
+if (ANDROID)
+    list(APPEND SRCS src/android/ThermalManager.cpp)
 endif()
 if (LINUX OR ANDROID)
     list(APPEND SRCS src/linux/Condition.cpp)
