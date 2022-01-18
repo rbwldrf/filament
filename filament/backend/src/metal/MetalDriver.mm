@@ -1388,8 +1388,11 @@ void MetalDriver::enumerateSamplerGroups(
         }
         const auto* metalSamplerGroup = mContext->samplerBindings[samplerGroupIdx];
         if (!metalSamplerGroup) {
-            utils::slog.w << "Program has non-empty samplerGroup (index " << samplerGroupIdx <<
-                    ") but has not bound any samplers." << utils::io::endl;
+#ifndef NDEBUG
+            // FIXME: this warning is emitted with several glTF models (Fox, Littlest Tokyo).
+            utils::slog.w << "Program has non-empty samplerGroup (index " << (int) samplerGroupIdx
+                    << ") but has not bound any samplers." << utils::io::endl;
+#endif
             continue;
         }
         SamplerGroup* sb = metalSamplerGroup->sb.get();
